@@ -7,12 +7,13 @@ header{
     justify-content: space-around;
     position: sticky;
     border-bottom: 1px solid #383838;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 header a{
     text-decoration: none;
     color: #fff;
+    background-color: transparent;
 }
 
 .logo{

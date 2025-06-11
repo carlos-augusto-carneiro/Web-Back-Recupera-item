@@ -7,6 +7,7 @@ import Item from './pages/Item';
 import Erro from './components/Erro';
 import Perdi from './pages/Perdi'
 import Achei from './pages/Achei'
+import Footer from './components/Footer';
 
 function RoutesApp(){
     return(
@@ -22,6 +23,7 @@ function RoutesApp(){
 
                 <Route path="*" element={<Erro/>}/>
             </Routes>
+            <Footer/>
         </BrowserRouter>
     )
 }
