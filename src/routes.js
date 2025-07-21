@@ -17,9 +17,10 @@ function RoutesApp(){
                 <Route path="/" element={<Home/>}/>
                 <Route path="/sobre" element={<Sobre/>}/>
                 <Route path="/contato" element={<Contato/>}/>
-                <Route path="/item/:id" element={<Item/>}/>
-                <Route path="/achei-algo" element={<Achei/>}/>
-                <Route path="/perdi-algo" element={<Perdi/>}/>
+                <Route path="/achados/item/:id" element={<Item />} />
+                <Route path="/perdidos/item/:id" element={<Item />} />
+                <Route path="/achados" element={<Achei/>}/>
+                <Route path="/perdidos" element={<Perdi/>}/>
 
                 <Route path="*" element={<Erro/>}/>
             </Routes>

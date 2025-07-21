@@ -6,9 +6,9 @@
 }
 
 
-.container-home{
+.container-achei{
     width: 100%;
-     min-height: calc(100vh - 180px);
+    min-height: calc(100vh - 180px);
     display: flex;
     align-items: center;
     flex-direction: column;

@@ -1,6 +1,11 @@
+import { Link } from "react-router-dom";
+import "./sobre.css";
+
 function Sobre(){
     return(
-        <h1>Sobre o site</h1>
+        <div className="container-sobre">
+            <h1>Sobre o site</h1>
+        </div>
     )
 }
 
