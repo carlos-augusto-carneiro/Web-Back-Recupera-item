@@ -7,6 +7,8 @@ import Item from './pages/Item';
 import Erro from './components/Erro';
 import Perdi from './pages/Perdi'
 import Achei from './pages/Achei'
+import Login from './pages/Login';
+import Cadastro from './pages/Cadastro';
 import Footer from './components/Footer';
 
 function RoutesApp(){
@@ -21,6 +23,8 @@ function RoutesApp(){
                 <Route path="/perdidos/item/:id" element={<Item />} />
                 <Route path="/achados" element={<Achei/>}/>
                 <Route path="/perdidos" element={<Perdi/>}/>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/cadastro" element={<Cadastro/>}/>
 
                 <Route path="*" element={<Erro/>}/>
             </Routes>
