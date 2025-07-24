@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { cadastrarUsuario } from '../../service/usuarioService'; 
 import './cadastro.css';
 
 const Cadastro = () => {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const [perfil, setPerfil] = useState('Aluno');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,27 +14,18 @@ const Cadastro = () => {
       nome,
       email,
       senha,
-      perfil,
     };
 
     try {
-      const response = await fetch('/createdUser', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(usuario),
-      });
-
-      if (response.ok) {
+        // AQUI, ele CHAMA a função que foi importada do serviço
+        await cadastrarUsuario(usuario);
         alert('Usuário cadastrado com sucesso!');
-        // Redirecionar para a página de login ou outra página
-      } else {
-        alert('Erro ao cadastrar usuário.');
-      }
+        // Limpa o formulário
+        setNome('');
+        setEmail('');
+        setSenha('');
     } catch (error) {
-      console.error('Erro na requisição:', error);
-      alert('Erro na requisição.');
+        alert('Erro ao cadastrar usuário. Verifique o console.');
     }
   };
 
@@ -68,15 +59,6 @@ const Cadastro = () => {
             onChange={(e) => setSenha(e.target.value)}
             required
           />
-        </div>
-        <div className="form-group">
-          <label>Perfil:</label>
-          <select value={perfil} onChange={(e) => setPerfil(e.target.value)}>
-            <option value="Aluno">Aluno</option>
-            <option value="Professor">Professor</option>
-            <option value="Guarda">Guarda</option>
-            <option value="Administrador">Administrador</option>
-          </select>
         </div>
         <button type="submit">Cadastrar</button>
       </form>

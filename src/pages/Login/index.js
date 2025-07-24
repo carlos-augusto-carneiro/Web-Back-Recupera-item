@@ -1,38 +1,34 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { loginUsuario } from '../../service/usuarioService';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/authContext';
 import './login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const usuario = {
-      email,
-      senha,
+        e.preventDefault();
+        try {
+            const response = await loginUsuario({ email, senha });
+
+            if (response.acessString) {
+                // Chama a função de login do contexto, passando o token e a expiração
+                login(response.acessString, response.expiresIn);
+                alert('Login bem-sucedido!');
+                navigate('/perdidos');
+            } else {
+                alert('Token não recebido.');
+            }
+        } catch (error) {
+            alert('Erro ao fazer login.');
+        }
     };
-
-    try {
-      const response = await fetch('/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(usuario),
-      });
-
-      if (response.ok) {
-        // Lógica de sucesso no login (ex: salvar token, redirecionar)
-        alert('Login bem-sucedido!');
-      } else {
-        alert('E-mail ou senha inválidos.');
-      }
-    } catch (error) {
-      console.error('Erro na requisição:', error);
-      alert('Erro na requisição.');
-    }
-  };
 
   return (
     <div className="login-container">
