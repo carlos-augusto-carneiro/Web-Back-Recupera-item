@@ -11,6 +11,10 @@ import Login from './pages/Login';
 import Cadastro from './pages/Cadastro';
 import Footer from './components/Footer';
 import EsqueciSenha from './pages/esqueci-senha';
+import ConfirmarEmail from './pages/verificar_conta/index';
+import RedefinirSenha from './pages/redefinir_senha';
+import Painel from './pages/Painel';
+import AdicionarItem from './pages/AdicionarItem'; // Nova importação
     
 function RoutesApp(){
     return(
@@ -27,6 +31,10 @@ function RoutesApp(){
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/cadastro" element={<Cadastro/>}/>
                 <Route path="/esqueci-senha" element={<EsqueciSenha/>}/>
+                <Route path="/confirmar" element={<ConfirmarEmail/>}/>
+                <Route path="/recuperar" element={<RedefinirSenha/>}/>
+                <Route path="/painel" element={<Painel/>}/>
+                <Route path="/adicionar-item" element={<AdicionarItem/>}/> {/* Nova rota */}
 
                 <Route path="*" element={<Erro/>}/>
             </Routes>

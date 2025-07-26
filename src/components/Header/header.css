@@ -35,3 +35,122 @@ header a{
     transition: all 0.3s;
     border-bottom: 2px solid #1877f2 ;
 }
+
+/* Estilos para o menu do usuário */
+.user-menu {
+    position: relative;
+    display: inline-block;
+    z-index: 1001; /* Garante que o container também tenha z-index alto */
+}
+
+.user-button {
+    background: linear-gradient(90deg, #1877f2, #6200ff);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    transition: background 0.3s ease;
+}
+
+.user-button:hover {
+    background: linear-gradient(90deg, #6200ff, #1877f2);
+}
+
+.user-email {
+    font-weight: 500;
+}
+
+.user-role {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.dropdown-arrow {
+    transition: transform 0.2s ease;
+    font-size: 0.7rem;
+}
+
+.dropdown-arrow.open {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 4px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6); /* Sombra mais forte */
+    min-width: 200px;
+    z-index: 9999; /* Z-index muito alto */
+    margin-top: 0.25rem;
+}
+
+.dropdown-item {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: none;
+    border: none;
+    color: #e0e0e0;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background: #333;
+}
+
+.dropdown-item.logout {
+    color: #ff4757;
+}
+
+.dropdown-item.logout:hover {
+    background: #2d1b1b;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: #333;
+    margin: 0.25rem 0;
+}
+
+/* Se o header tiver z-index baixo, aumente também */
+header {
+    position: relative;
+    z-index: 1000; /* Garante que o header esteja acima de outros elementos */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .user-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .user-email {
+        display: none; /* Esconde email em mobile */
+    }
+    
+    .dropdown-menu {
+        right: -50px;
+        min-width: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dropdown-menu {
+        right: -80px;
+        min-width: 160px;
+    }
+}

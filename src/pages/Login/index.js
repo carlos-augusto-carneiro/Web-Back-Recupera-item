@@ -5,6 +5,21 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/authContext';
 import './login.css';
 
+// Função para decodificar JWT
+const decodeJWT = (token) => {
+    try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonPayload);
+    } catch (error) {
+        console.error('Erro ao decodificar token:', error);
+        return null;
+    }
+};
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
@@ -18,15 +33,42 @@ const Login = () => {
             const response = await loginUsuario({ email, senha });
 
             if (response.acessString) {
-                // Chama a função de login do contexto, passando o token e a expiração
-                login(response.acessString, response.expiresIn);
-                alert('Login bem-sucedido!');
-                navigate('/perdidos');
+                // Decodifica o token para extrair o perfil
+                const decodedToken = decodeJWT(response.acessString);
+                
+                if (decodedToken) {
+                    // Chama a função de login do contexto
+                    login(response.acessString, response.expiresIn);
+                    alert('Login bem-sucedido!');
+                    
+                    // Redireciona baseado no perfil do usuário
+                    const perfil = decodedToken.perfil;
+                    console.log('Perfil do usuário:', perfil); // Para debug
+                    
+                    switch (perfil) {
+                        case 'Administrador':
+                            navigate('/painel');
+                            break;
+                        case 'Guarda':
+                            navigate('/painel');
+                            break;
+                        case 'Professor':
+                            navigate('/painel');
+                            break;
+                        case 'Aluno':
+                        default:
+                            navigate('/perdidos');
+                            break;
+                    }
+                } else {
+                    alert('Erro ao processar dados do usuário.');
+                }
             } else {
                 alert('Token não recebido.');
             }
         } catch (error) {
-            alert('Erro ao fazer login.');
+            console.error('Erro no login:', error);
+            alert('Erro ao fazer login. Verifique suas credenciais.');
         }
     };
 
@@ -55,7 +97,10 @@ const Login = () => {
         <button type="submit">Entrar</button>
       </form>
       <p>
-        Não tem uma conta? <Link to="/cadastro">Cadastre-se</Link>
+        Não tem uma conta? <Link to="/cadastre-se">Cadastre-se</Link>
+      </p>
+      <p>
+        Esqueceu a senha? <Link to="/esqueci-senha">Recupere sua senha</Link>
       </p>
     </div>
   );

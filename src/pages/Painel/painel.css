@@ -1,0 +1,552 @@
+/* Estilos específicos para o painel admin */
+.filtros-container {
+    background: #1e1e1e;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    border: 1px solid #333;
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.input-filtro, .select-filtro {
+    padding: 0.5rem;
+    border: 1px solid #333;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+}
+
+.input-filtro {
+    flex: 1;
+    min-width: 200px;
+}
+
+.input-filtro:focus, .select-filtro:focus {
+    outline: none;
+    border-color: #1877f2;
+}
+
+.select-filtro {
+    min-width: 150px;
+}
+
+.btn-recarregar {
+    background: linear-gradient(90deg, #1877f2, #6200ff);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.btn-recarregar:hover {
+    background: linear-gradient(90deg, #6200ff, #1877f2);
+}
+
+/* Container de usuários */
+.usuarios-container {
+    background: #1e1e1e;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    border: 1px solid #333;
+}
+
+.usuarios-container h2 {
+    color: #ffffff;
+    margin: 0 0 1rem 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.usuarios-tabela {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.tabela-header {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 2fr;
+    gap: 1rem;
+    padding: 1rem;
+    background: linear-gradient(90deg, #1877f2, #6200ff);
+    border-radius: 4px;
+    font-weight: bold;
+    color: white;
+}
+
+.tabela-row {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 2fr;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid #333;
+    border-radius: 4px;
+    align-items: center;
+    transition: background-color 0.2s;
+    background-color: #2c2c2c;
+}
+
+.tabela-row:hover {
+    background-color: #333;
+}
+
+.usuario-nome {
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.usuario-email {
+    color: #03dac6;
+    font-size: 0.9rem;
+}
+
+.usuario-tipo {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.tipo-aluno { background-color: #1877f2; color: white; }
+.tipo-professor { background-color: #6200ff; color: white; }
+.tipo-guarda { background-color: #03dac6; color: #121212; }
+.tipo-administrador { background-color: #ff6b35; color: white; }
+
+.usuario-acoes {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.select-promover {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid #333;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    min-width: 140px;
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+}
+
+.select-promover:focus {
+    outline: none;
+    border-color: #1877f2;
+}
+
+.btn-deletar {
+    background: linear-gradient(90deg, #ff4757, #ff3742);
+    color: white;
+    border: none;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.btn-deletar:hover:not(:disabled) {
+    background: linear-gradient(90deg, #ff3742, #ff4757);
+}
+
+.btn-deletar:disabled {
+    background: #555;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.sem-usuarios {
+    text-align: center;
+    padding: 2rem;
+    color: #888;
+    font-style: italic;
+}
+
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: #1877f2;
+    font-size: 1.125rem;
+}
+
+/* Painel Container */
+.painel-container {
+    min-height: 100vh;
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.painel-header {
+    background: linear-gradient(90deg, #1877f2, #6200ff);
+    color: white;
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.painel-header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.painel-header h1 {
+    font-size: 2rem;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-role {
+    background-color: rgba(255,255,255,0.2);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+
+.btn-logout {
+    background: linear-gradient(90deg, #6200ff, #1877f2);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.btn-logout:hover {
+    background: linear-gradient(90deg, #1877f2, #6200ff);
+}
+
+.painel-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.painel-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: #1e1e1e;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    border: 1px solid #333;
+    text-align: center;
+}
+
+.stat-card h3 {
+    margin: 0 0 0.5rem 0;
+    color: #1877f2;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Ações do painel */
+.painel-actions {
+    background: #1e1e1e;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    border: 1px solid #333;
+    margin-bottom: 2rem;
+}
+
+.painel-actions h2 {
+    color: #ffffff;
+    margin: 0 0 1rem 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.action-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn-action {
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    transition: background 0.3s ease;
+}
+
+.btn-primary { 
+    background: linear-gradient(90deg, #1877f2, #6200ff);
+    color: white;
+}
+.btn-primary:hover { 
+    background: linear-gradient(90deg, #6200ff, #1877f2);
+}
+
+.btn-secondary { 
+    background: linear-gradient(90deg, #555, #777);
+    color: white;
+}
+.btn-secondary:hover { 
+    background: linear-gradient(90deg, #777, #555);
+}
+
+.btn-warning { 
+    background: linear-gradient(90deg, #ff9f43, #feca57);
+    color: #121212;
+}
+.btn-warning:hover { 
+    background: linear-gradient(90deg, #feca57, #ff9f43);
+}
+
+.btn-danger { 
+    background: linear-gradient(90deg, #ff4757, #ff3742);
+    color: white;
+}
+.btn-danger:hover { 
+    background: linear-gradient(90deg, #ff3742, #ff4757);
+}
+
+.btn-info { 
+    background: linear-gradient(90deg, #03dac6, #18dcff);
+    color: #121212;
+}
+.btn-info:hover { 
+    background: linear-gradient(90deg, #18dcff, #03dac6);
+}
+
+.painel-info {
+    text-align: center;
+    padding: 2rem;
+    background: #1e1e1e;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    border: 1px solid #333;
+}
+
+.painel-info h2 {
+    color: #ffffff;
+    margin: 0 0 1rem 0;
+}
+
+.painel-info p {
+    color: #e0e0e0;
+}
+
+.painel-erro {
+    text-align: center;
+    padding: 2rem;
+    background: #1e1e1e;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    border: 1px solid #ff4757;
+}
+
+.painel-erro h2 {
+    color: #ff4757;
+    margin: 0 0 1rem 0;
+}
+
+.painel-erro p {
+    color: #e0e0e0;
+    margin-bottom: 1rem;
+}
+
+.painel-erro button {
+    background: linear-gradient(90deg, #1877f2, #6200ff);
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.painel-erro button:hover {
+    background: linear-gradient(90deg, #6200ff, #1877f2);
+}
+
+/* Estilos específicos para os painéis */
+.painel-aluno, .painel-guarda, .painel-professor, .painel-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.sem-itens {
+    text-align: center;
+    padding: 2rem;
+    background: #2c2c2c;
+    border-radius: 8px;
+    border: 2px dashed #555;
+}
+
+.sem-itens p {
+    margin-bottom: 1rem;
+    color: #888;
+}
+
+.itens-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.item-card {
+    background: #1e1e1e;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    border: 1px solid #333;
+    border-left: 4px solid #1877f2;
+}
+
+.item-card.pendente {
+    border-left-color: #ff9f43;
+}
+
+.item-card.sala {
+    border-left-color: #6200ff;
+}
+
+.item-card h4 {
+    margin: 0 0 0.5rem 0;
+    color: #ffffff;
+}
+
+.item-card p {
+    margin: 0.25rem 0;
+    color: #888;
+    font-size: 0.875rem;
+}
+
+.btn-entregar, .btn-ajudar {
+    background: linear-gradient(90deg, #03dac6, #18dcff);
+    color: #121212;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    transition: background 0.3s ease;
+}
+
+.btn-entregar:hover, .btn-ajudar:hover {
+    background: linear-gradient(90deg, #18dcff, #03dac6);
+}
+
+.meus-itens, .itens-pendentes, .itens-sala {
+    background: #1e1e1e;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    border: 1px solid #333;
+}
+
+.meus-itens h2, .itens-pendentes h2, .itens-sala h2 {
+    margin: 0 0 1rem 0;
+    color: #ffffff;
+    border-bottom: 2px solid #333;
+    padding-bottom: 0.5rem;
+    font-family: 'Arial', sans-serif;
+}
+
+.info-desenvolvimento {
+    background: linear-gradient(135deg, #1877f2, #6200ff);
+    color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.info-desenvolvimento h3 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    font-family: 'Arial', sans-serif;
+}
+
+.info-desenvolvimento p {
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+/* Responsividade específica */
+@media (max-width: 768px) {
+    .tabela-header, .tabela-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .filtros-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .usuario-acoes {
+        flex-direction: column;
+    }
+    
+    .painel-header-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .user-info {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .itens-lista {
+        grid-template-columns: 1fr;
+    }
+    
+    .painel-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .action-buttons {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .painel-stats {
+        grid-template-columns: 1fr;
+    }
+}

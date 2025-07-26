@@ -56,16 +56,17 @@ export const loginUsuario = async (loginData) => {
 };
 
 /**
- * Cria um novo usuário no banco de dados.
- * @param {object} email - Objeto email.
- * @returns {Promise<object>} O usuário criado.
+ * Confirma o email do usuário com o token recebido
+ * @param {string} token - Token de confirmação
+ * @returns {Promise<object>} Resposta da confirmação
  */
-export const verificarEmail = async (email) => {
+export const confirmarEmailComToken = async (token) => {
     try {
-        const response = await apiClient.post('/confirmar', { email });
+        // Endpoint: PUT /confirmar com token como query parameter
+        const response = await apiClient.put(`/confirmar?token=${token}`);
         return response.data;
     } catch (error) {
-        console.error("Erro ao verificar email:", error.response?.data || error.message);
+        console.error("Erro ao confirmar email com token:", error.response?.data || error.message);
         throw error;
     }
 };
@@ -78,7 +79,8 @@ export const verificarEmail = async (email) => {
  */
 export const RecuperarSenha = async (email) => {
     try {
-        const response = await apiClient.post('/esqueci-senha', { email });
+        console.log('Recuperando senha para o email:', email);
+        const response = await apiClient.post('/esqueci-senha', { Email: email });
         return response.data;
     } catch (error) {
         console.error("Erro ao recuperar senha:", error.response?.data || error.message);
@@ -87,13 +89,18 @@ export const RecuperarSenha = async (email) => {
 };
 
 /**
- * Cria um novo usuário no banco de dados.
- * @param {object} email - Objeto email.
- * @returns {Promise<object>} O usuário criado.
+ * Redefine a senha do usuário usando o token
+ * @param {string} token - Token de recuperação
+ * @param {string} novaSenha - Nova senha do usuário
+ * @returns {Promise<object>} Resposta da redefinição
  */
-export const AtualizarSenha = async (dados) => {
+export const AtualizarSenha = async (token, novaSenha) => {
     try {
-        const response = await apiClient.post('/redefinir-senha', dados);
+        // Endpoint: PUT /redefinir-senha
+        const response = await apiClient.put('/redefinir-senha', {
+            token: token,
+            novaSenha: novaSenha
+        });
         return response.data;
     } catch (error) {
         console.error("Erro ao redefinir senha:", error.response?.data || error.message);
