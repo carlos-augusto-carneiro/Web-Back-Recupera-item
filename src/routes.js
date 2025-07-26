@@ -10,7 +10,8 @@ import Achei from './pages/Achei'
 import Login from './pages/Login';
 import Cadastro from './pages/Cadastro';
 import Footer from './components/Footer';
-
+import EsqueciSenha from './pages/esqueci-senha';
+    
 function RoutesApp(){
     return(
         <BrowserRouter>
@@ -25,6 +26,7 @@ function RoutesApp(){
                 <Route path="/perdidos" element={<Perdi/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/cadastro" element={<Cadastro/>}/>
+                <Route path="/esqueci-senha" element={<EsqueciSenha/>}/>
 
                 <Route path="*" element={<Erro/>}/>
             </Routes>

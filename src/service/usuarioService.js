@@ -54,3 +54,49 @@ export const loginUsuario = async (loginData) => {
         throw error;
     }
 };
+
+/**
+ * Cria um novo usuário no banco de dados.
+ * @param {object} email - Objeto email.
+ * @returns {Promise<object>} O usuário criado.
+ */
+export const verificarEmail = async (email) => {
+    try {
+        const response = await apiClient.post('/confirmar', { email });
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao verificar email:", error.response?.data || error.message);
+        throw error;
+    }
+};
+
+
+/**
+ * Cria um novo usuário no banco de dados.
+ * @param {object} email - Objeto email.
+ * @returns {Promise<object>} O usuário criado.
+ */
+export const RecuperarSenha = async (email) => {
+    try {
+        const response = await apiClient.post('/esqueci-senha', { email });
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao recuperar senha:", error.response?.data || error.message);
+        throw error;
+    }
+};
+
+/**
+ * Cria um novo usuário no banco de dados.
+ * @param {object} email - Objeto email.
+ * @returns {Promise<object>} O usuário criado.
+ */
+export const AtualizarSenha = async (dados) => {
+    try {
+        const response = await apiClient.post('/redefinir-senha', dados);
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao redefinir senha:", error.response?.data || error.message);
+        throw error;
+    }
+};
