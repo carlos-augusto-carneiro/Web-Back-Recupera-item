@@ -1,0 +1,492 @@
+/* Estilos específicos para o painel do administrador */
+.painel-container {
+    min-height: 100vh;
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.painel-header {
+    background: #1e1e1e;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.painel-header h1 {
+    color: #ff6b35; /* Laranja para diferenciar do guarda (azul) e professor (verde) */
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-info span {
+    color: #ccc;
+}
+
+.btn-logout {
+    padding: 0.5rem 1rem;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-logout:hover {
+    background: #c82333;
+}
+
+.painel-content {
+    padding: 2rem;
+}
+
+/* Estilos específicos do painel admin */
+.painel-admin {
+    padding: 2rem;
+    background-color: #121212;
+    min-height: 100vh;
+    color: #e0e0e0;
+}
+
+/* Seção de estatísticas */
+.painel-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: #1e1e1e;
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 1px solid #333;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 53, 0.2);
+}
+
+.stat-card h3 {
+    color: #ccc;
+    margin: 0 0 1rem 0;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ff6b35;
+    margin: 0;
+    display: block;
+}
+
+/* Filtros */
+.filtros-container {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.filtro-busca {
+    flex: 1;
+    min-width: 250px;
+}
+
+.input-filtro {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #333;
+    border-radius: 6px;
+    background: #2c2c2c;
+    color: #e0e0e0;
+    font-size: 1rem;
+}
+
+.input-filtro:focus {
+    outline: none;
+    border-color: #ff6b35;
+}
+
+.input-filtro::placeholder {
+    color: #888;
+}
+
+.filtro-tipo {
+    min-width: 180px;
+}
+
+.select-filtro {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #333;
+    border-radius: 6px;
+    background: #2c2c2c;
+    color: #e0e0e0;
+    font-size: 1rem;
+}
+
+.select-filtro:focus {
+    outline: none;
+    border-color: #ff6b35;
+}
+
+.btn-recarregar {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(90deg, #ff6b35, #f7931e);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-recarregar:hover {
+    background: linear-gradient(90deg, #f7931e, #ff6b35);
+    transform: translateY(-2px);
+}
+
+/* Container dos usuários */
+.usuarios-container {
+    background: #1e1e1e;
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid #333;
+}
+
+.usuarios-container h2 {
+    color: #ff6b35;
+    margin: 0 0 1.5rem 0;
+    font-size: 1.5rem;
+}
+
+.loading {
+    text-align: center;
+    color: #888;
+    font-size: 1.2rem;
+    padding: 3rem;
+}
+
+/* Tabela de usuários */
+.usuarios-tabela {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #333;
+}
+
+.tabela-header {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 2fr;
+    background: #333;
+    color: #ff6b35;
+    font-weight: 600;
+    padding: 1rem;
+    border-bottom: 2px solid #444;
+}
+
+.tabela-header span {
+    padding: 0 0.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tabela-row {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr 2fr;
+    background: #2c2c2c;
+    padding: 1rem;
+    border-bottom: 1px solid #444;
+    align-items: center;
+    transition: background 0.3s ease;
+}
+
+.tabela-row:hover {
+    background: #3c3c3c;
+}
+
+.tabela-row:last-child {
+    border-bottom: none;
+}
+
+/* Células da tabela */
+.usuario-nome {
+    font-weight: 500;
+    color: #ffffff;
+    padding: 0 0.5rem;
+    word-wrap: break-word;
+}
+
+.usuario-email {
+    color: #ccc;
+    font-size: 0.9rem;
+    padding: 0 0.5rem;
+    word-wrap: break-word;
+}
+
+/* Badges de tipo de usuário */
+.usuario-tipo {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 0.5rem;
+    text-transform: capitalize;
+}
+
+.tipo-aluno {
+    background: #3b82f6;
+    color: white;
+}
+
+.tipo-professor {
+    background: #22c55e;
+    color: white;
+}
+
+.tipo-guarda {
+    background: #1877f2;
+    color: white;
+}
+
+.tipo-administrador {
+    background: #ff6b35;
+    color: white;
+}
+
+/* Ações dos usuários */
+.usuario-acoes {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    padding: 0 0.5rem;
+}
+
+.select-promover {
+    padding: 0.5rem;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background: #3c3c3c;
+    color: #e0e0e0;
+    font-size: 0.8rem;
+    cursor: pointer;
+    min-width: 120px;
+}
+
+.select-promover:focus {
+    outline: none;
+    border-color: #ff6b35;
+}
+
+.btn-deletar {
+    padding: 0.5rem 1rem;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-deletar:hover:not(:disabled) {
+    background: #c82333;
+    transform: translateY(-1px);
+}
+
+.btn-deletar:disabled {
+    background: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.sem-usuarios {
+    text-align: center;
+    color: #888;
+    font-size: 1.1rem;
+    padding: 3rem;
+    background: #2c2c2c;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .tabela-header,
+    .tabela-row {
+        grid-template-columns: 1.5fr 2fr 1fr 2fr;
+    }
+    
+    .filtros-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filtro-busca {
+        min-width: unset;
+    }
+}
+
+@media (max-width: 768px) {
+    .painel-admin {
+        padding: 1rem;
+    }
+    
+    .painel-stats {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+    
+    .stat-card {
+        padding: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .usuarios-container {
+        padding: 1rem;
+    }
+    
+    .tabela-header,
+    .tabela-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .tabela-header {
+        display: none; /* Esconde o header em mobile */
+    }
+    
+    .tabela-row {
+        display: block;
+        padding: 1rem;
+        margin-bottom: 0.5rem;
+        border-radius: 8px;
+        border: 1px solid #444;
+    }
+    
+    .usuario-nome::before {
+        content: "Nome: ";
+        font-weight: bold;
+        color: #ff6b35;
+    }
+    
+    .usuario-email::before {
+        content: "Email: ";
+        font-weight: bold;
+        color: #ff6b35;
+    }
+    
+    .usuario-tipo::before {
+        content: "Perfil: ";
+        font-weight: bold;
+        color: #ff6b35;
+    }
+    
+    .usuario-acoes {
+        margin-top: 1rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .select-promover {
+        width: 100%;
+        min-width: unset;
+    }
+    
+    .btn-deletar {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .stat-card {
+        padding: 0.75rem;
+    }
+    
+    .stat-number {
+        font-size: 1.25rem;
+    }
+    
+    .usuarios-container h2 {
+        font-size: 1.25rem;
+    }
+    
+    .input-filtro,
+    .select-filtro {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+    }
+    
+    .btn-recarregar {
+        padding: 0.6rem 1rem;
+    }
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tabela-row {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Estados especiais */
+.usuario-proprio {
+    background: linear-gradient(90deg, rgba(255, 107, 53, 0.1), transparent);
+    border-left: 3px solid #ff6b35;
+}
+
+.usuario-proprio .usuario-nome::after {
+    content: " (Você)";
+    color: #ff6b35;
+    font-size: 0.8rem;
+    font-weight: normal;
+}
+
+.btn-editar-perfil-header {
+    background: none;
+    border: 1px solid #555;
+    color: #e0e0e0;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-editar-perfil-header:hover {
+    background: #333;
+    border-color: #666;
+}

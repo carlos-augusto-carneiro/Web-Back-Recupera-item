@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-    baseURL: "http://localhost:8080/admin",
+    baseURL: "https://web-back-end-recupera-item.onrender.com/admin",
     headers: {
         'Content-Type': 'application/json'
     }

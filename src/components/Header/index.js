@@ -45,7 +45,6 @@ function Header(){
         <header>
             <Link className="logo" to='/'>Recupera Item</Link>
             <div className="nav">
-                <Link to='/achados'>Achados</Link>
                 <Link to='/perdidos'>Perdidos</Link>
 
                 {isAuthenticated ? (

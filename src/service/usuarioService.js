@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-    baseURL: "http://localhost:8080/usuario", // URL base da sua API
+    baseURL: "https://web-back-end-recupera-item.onrender.com/usuario", // URL base da sua API
     headers: {
         'Content-Type': 'application/json'
     }

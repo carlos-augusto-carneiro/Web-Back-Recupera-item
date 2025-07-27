@@ -1,91 +1,226 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../context/authContext';
+import { listarTodosItens, excluirItem } from '../../../service/itemService';
+import PerfilUsuario from '../../../components/PerfilUsuario';
+import './PainelGuarda.css';
 
-const PainelGuarda = ({ user }) => {
-    const [itensPendentes, setItensPendentes] = useState([]);
-    const [estatisticas, setEstatisticas] = useState({
-        itensHoje: 0,
-        itensPendentes: 0,
-        itensEntregues: 0,
-        itensRegistrados: 0
-    });
+const PainelGuarda = () => {
+    const { user, isAuthenticated, logout } = useAuth();
+    const navigate = useNavigate();
+    const [itens, setItens] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [filtroStatus, setFiltroStatus] = useState('todos');
+    const [busca, setBusca] = useState('');
+    const [showPerfil, setShowPerfil] = useState(false);
+    const [userData, setUserData] = useState(user);
+
+    // Verifica autenticação e permissão
+    React.useEffect(() => {
+        if (!isAuthenticated) {
+            navigate('/login');
+            return;
+        }
+        
+        if (!user || user.perfil !== 'Guarda') {
+            alert('Você não tem permissão para acessar esta página');
+            navigate('/painel');
+        }
+    }, [isAuthenticated, user, navigate]);
+
+    // Atualizar userData quando user mudar
+    useEffect(() => {
+        setUserData(user);
+    }, [user]);
+
+    // Carrega a lista de itens
+    const carregarItens = async () => {
+        setLoading(true);
+        try {
+            const dados = await listarTodosItens();
+            setItens(dados);
+        } catch (error) {
+            console.error('Erro ao carregar itens:', error);
+            alert('Erro ao carregar lista de itens');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        // Aqui você carregará os dados reais do backend
-        // Por enquanto, dados simulados
-        setEstatisticas({
-            itensHoje: 5,
-            itensPendentes: 8,
-            itensEntregues: 25,
-            itensRegistrados: 12
-        });
+        carregarItens();
     }, []);
 
+    // Filtrar itens baseado no status e busca
+    const itensFiltrados = itens.filter(item => {
+        const matchStatus = filtroStatus === 'todos' || 
+                           (filtroStatus === 'devolvidos' && item.devolvido) ||
+                           (filtroStatus === 'nao-devolvidos' && !item.devolvido);
+        
+        const matchBusca = !busca || 
+                          item.nome.toLowerCase().includes(busca.toLowerCase()) ||
+                          item.descricao.toLowerCase().includes(busca.toLowerCase());
+        
+        return matchStatus && matchBusca;
+    });
+
+    const handleExcluirItem = async (itemId, nomeItem) => {
+        if (!window.confirm(`Tem certeza que deseja excluir o item "${nomeItem}"?`)) {
+            return;
+        }
+
+        try {
+            await excluirItem(itemId);
+            alert('Item excluído com sucesso!');
+            // Recarregar a lista
+            carregarItens();
+        } catch (error) {
+            console.error('Erro ao excluir item:', error);
+            alert('Erro ao excluir item: ' + (error.response && error.response.data ? error.response.data : error.message));
+        }
+    };
+
+    const handleLogout = () => {
+        logout();
+        navigate('/');
+    };
+
+    if (loading) {
+        return (
+            <div className="painel-container">
+                <div className="loading">Carregando...</div>
+            </div>
+        );
+    }
+
     return (
-        <div className="painel-guarda">
-            <div className="painel-stats">
-                <div className="stat-card">
-                    <h3>Itens Hoje</h3>
-                    <span className="stat-number">{estatisticas.itensHoje}</span>
+        <div className="painel-container">
+            <header className="painel-header">
+                <h1>Painel do Guarda</h1>
+                <div className="user-info">
+                    <span>Bem-vindo, {user && user.nome}!</span>
+                    <button 
+                        onClick={() => setShowPerfil(true)}
+                        className="btn-editar-perfil-header"
+                        title="Editar Perfil"
+                    >
+                        ✏️
+                    </button>
+                    <button onClick={handleLogout} className="btn-logout">
+                        Sair
+                    </button>
                 </div>
-                <div className="stat-card">
-                    <h3>Pendentes</h3>
-                    <span className="stat-number">{estatisticas.itensPendentes}</span>
-                </div>
-                <div className="stat-card">
-                    <h3>Entregues</h3>
-                    <span className="stat-number">{estatisticas.itensEntregues}</span>
-                </div>
-                <div className="stat-card">
-                    <h3>Registrados</h3>
-                    <span className="stat-number">{estatisticas.itensRegistrados}</span>
-                </div>
-            </div>
+            </header>
 
-            <div className="painel-actions">
-                <h2>Ações do Guarda</h2>
-                <div className="action-buttons">
-                    <button className="btn-action btn-primary">
-                        Registrar Item Encontrado
-                    </button>
-                    <button className="btn-action btn-secondary">
-                        Confirmar Entrega
-                    </button>
-                    <button className="btn-action btn-warning">
-                        Gerar Relatório Diário
-                    </button>
-                    <button className="btn-action btn-info">
-                        Verificar Documentos
-                    </button>
+            <div className="painel-content">
+                <div className="actions-section">
+                    <Link to="/adicionar-item" className="btn-primary">
+                        + Adicionar Item Encontrado
+                    </Link>
+                    <Link to="/perdidos" className="btn-secondary">
+                        Ver Itens Perdidos
+                    </Link>
                 </div>
-            </div>
 
-            <div className="itens-pendentes">
-                <h2>Itens Pendentes de Entrega</h2>
-                <div className="itens-lista">
-                    {itensPendentes.length === 0 ? (
-                        <div className="sem-itens">
-                            <p>Nenhum item pendente de entrega no momento.</p>
-                            <p>✅ Parabéns! Tudo em dia.</p>
+                <div className="itens-section">
+                    <div className="section-header">
+                        <h2>Gerenciar Itens</h2>
+                        
+                        <div className="filtros-container">
+                            <div className="filtro-status">
+                                <select 
+                                    value={filtroStatus} 
+                                    onChange={(e) => setFiltroStatus(e.target.value)}
+                                    className="select-filtro"
+                                >
+                                    <option value="todos">Todos os Status</option>
+                                    <option value="nao-devolvidos">Não Devolvidos</option>
+                                    <option value="devolvidos">Devolvidos</option>
+                                </select>
+                            </div>
+                            
+                            <div className="busca-container">
+                                <input
+                                    type="text"
+                                    placeholder="Buscar itens..."
+                                    value={busca}
+                                    onChange={(e) => setBusca(e.target.value)}
+                                    className="input-busca"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    {itensFiltrados.length > 0 ? (
+                        <div className="tabela-container">
+                            <table className="tabela-itens">
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Descrição</th>
+                                        <th>Status</th>
+                                        <th>Data</th>
+                                        <th>Cadastrado por</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {itensFiltrados.map(item => (
+                                        <tr key={item.id}>
+                                            <td className="nome-item">{item.nome}</td>
+                                            <td className="descricao-item">
+                                                {item.descricao.length > 50 
+                                                    ? item.descricao.substring(0, 50) + '...' 
+                                                    : item.descricao
+                                                }
+                                            </td>
+                                            <td>
+                                                <span className={`status-badge ${item.devolvido ? 'devolvido' : 'nao-devolvido'}`}>
+                                                    {item.devolvido ? 'Devolvido' : 'Não Devolvido'}
+                                                </span>
+                                            </td>
+                                            <td>{new Date(item.dataCriacao).toLocaleDateString('pt-BR')}</td>
+                                            <td>{item.usuario ? item.usuario.nome : 'N/A'}</td>
+                                            <td className="acoes-cell">
+                                                <Link 
+                                                    to={`/perdidos/item/${item.id}`}
+                                                    className="btn-visualizar"
+                                                    title="Visualizar item"
+                                                >
+                                                    👁️
+                                                </Link>
+                                                <button 
+                                                    onClick={() => handleExcluirItem(item.id, item.nome)}
+                                                    className="btn-excluir"
+                                                    title="Excluir item"
+                                                >
+                                                    🗑️
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
                     ) : (
-                        itensPendentes.map(item => (
-                            <div key={item.id} className="item-card pendente">
-                                <h4>{item.nome}</h4>
-                                <p>Dono: {item.dono}</p>
-                                <p>Data: {item.data}</p>
-                                <p>Local: {item.local}</p>
-                                <button className="btn-entregar">Confirmar Entrega</button>
-                            </div>
-                        ))
+                        <div className="sem-itens">
+                            {busca ? 
+                                `Nenhum item encontrado para "${busca}"` : 
+                                'Nenhum item encontrado'
+                            }
+                        </div>
                     )}
                 </div>
             </div>
 
-            <div className="info-desenvolvimento">
-                <h3>🛡️ Painel do Guarda</h3>
-                <p>Controle total sobre itens perdidos e achados da instituição.</p>
-                <p>Funcionalidades específicas em desenvolvimento...</p>
-            </div>
+            {/* Modal de perfil */}
+            {showPerfil && (
+                <PerfilUsuario
+                    user={userData}
+                    onClose={() => setShowPerfil(false)}
+                    onUpdate={setUserData}
+                />
+            )}
         </div>
     );
 };

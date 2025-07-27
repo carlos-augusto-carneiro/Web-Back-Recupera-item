@@ -1,5 +1,4 @@
-
-/* Estilos específicos para o painel do guarda */
+/* Estilos para o painel do guarda */
 .painel-container {
     min-height: 100vh;
     background-color: #121212;
@@ -94,7 +93,7 @@
     padding: 3rem;
 }
 
-/* Estilos da tabela e seção de itens */
+/* Estilos da seção de itens */
 .itens-section {
     background: #1e1e1e;
     border-radius: 12px;
@@ -154,6 +153,11 @@
     border-color: #1877f2;
 }
 
+.input-busca::placeholder {
+    color: #888;
+}
+
+/* Estilos da tabela */
 .tabela-container {
     overflow-x: auto;
     border-radius: 8px;
@@ -190,12 +194,14 @@
     font-weight: 500;
     color: #ffffff;
     max-width: 200px;
+    word-wrap: break-word;
 }
 
 .descricao-item {
     max-width: 300px;
     color: #ccc;
     font-size: 0.9rem;
+    word-wrap: break-word;
 }
 
 .status-badge {
@@ -203,6 +209,7 @@
     border-radius: 12px;
     font-size: 0.8rem;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .status-badge.devolvido {
@@ -274,6 +281,10 @@
         text-align: center;
     }
     
+    .painel-content {
+        padding: 1rem;
+    }
+    
     .section-header {
         flex-direction: column;
         align-items: stretch;
@@ -305,10 +316,6 @@
 }
 
 @media (max-width: 480px) {
-    .painel-content {
-        padding: 1rem;
-    }
-    
     .itens-section {
         padding: 1rem;
     }
@@ -325,4 +332,29 @@
         height: 30px;
         font-size: 0.9rem;
     }
+    
+    .status-badge {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
+    }
+}
+
+.btn-editar-perfil-header {
+    background: none;
+    border: 1px solid #555;
+    color: #e0e0e0;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-editar-perfil-header:hover {
+    background: #333;
+    border-color: #666;
 }
